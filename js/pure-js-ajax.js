@@ -52,7 +52,26 @@ function pobierzDane() {
 	
 	ajax({
 		url: 'http://echo.jsontest.com/userId/108/userName/Akademia108/userURL/akademia108.pl',
+		onSuccess: function(response) {
+			
+			var jsonObj = JSON.parse(response);
+		
+			//tworze paragrafy, bo nie ma ich w strukturze mojego kodu HTML:
+			var parID = document.createElement('p');
+			var parName = document.createElement('p');
+			var parURL = document.createElement('p');
+		
+			//wrzucam dane do utworzonych (wyzej) przeze mnie paragrafow:
+			parID.innerHTML = "User ID " + jsonObj.userId;
+			parName.innerHTML = "User Name " + jsonObj.userName;
+			parURL.innerHTML = "User URL " + jsonObj.userURL;
+			
+			//teraz wrzucam to, co utworzylam (wyzej) do mojego dokumentu HTML:
+			document.body.appendChild(parID);
+			document.body.appendChild(parName);
+			document.body.appendChild(parURL);
+		}
 	});
 	
-	console.log('test');
+	
 }
